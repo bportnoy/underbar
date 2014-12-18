@@ -198,7 +198,7 @@
         objArr.push(collection[key]);
       }
       //reduce the array
-      return _.reduce(objArr);
+      accumulator = _.reduce(objArr,iterator,accumulator);
     }
     return accumulator;
   };
