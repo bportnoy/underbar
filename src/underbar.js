@@ -128,12 +128,13 @@
       }
       return newArray;
     }
-    /*else {
+    else {
       var obj = {};
       for (var key in collection){
-
+        obj[key] = iterator(collection[key]);
       }
-    }*/
+      return obj;
+    }
   };
 
   /*
@@ -219,7 +220,6 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
