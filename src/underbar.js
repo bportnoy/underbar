@@ -94,6 +94,7 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
     //hopefully will come up with a way to thoughtfully use filter here, but for now...
+    /* OLD SOLUTION
     var newArray = [];
     for (var i = 0; i<collection.length; i++){
       if (!test(collection[i])){
@@ -101,6 +102,11 @@
       }
     }
     return newArray;
+    */
+    //NEW SOLUTION
+    return _.filter(collection, function(collection){
+      return !test(collection);
+    })
   };
 
   // Produce a duplicate-free version of the array.
