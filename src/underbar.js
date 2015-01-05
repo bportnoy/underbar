@@ -228,7 +228,10 @@
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(failed, item){
       if (!failed) return false;
-      else return iterator(item);
+      else {
+        console.log(iterator(item));
+        return (item == iterator(item));
+      }
     },true);
     /*if (Array.isArray(collection)){
       for (var i = 0; i<collection.length; i++){
@@ -345,6 +348,9 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var pars = Array.prototype.slice.call(arguments,2);
+    clock.tick(wait);
+    setTimeout(function(){func.apply(null,pars)},wait);
   };
 
 
