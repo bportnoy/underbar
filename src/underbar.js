@@ -226,13 +226,22 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-    return _.reduce(collection, function(failed, item){
-      if (!failed) return false;
+    console.log(arguments.length);
+   //attempting to handle lack of callback if (arguments.lenth === 1) return _.every(collection, function(){return _identity()});
+    /*return _.reduce(collection, function(failed, item){
+      if (failed) return false;
       else {
         console.log(iterator(item));
-        return (item == iterator(item));
+        return iterator(item);
       }
-    },true);
+    },true);*/
+    /* code to make sure I'm understanding this problem
+    for (var i = 0; i<collection.length; i++){
+      if (!iterator(collection[i])) return false;
+    }
+    return true;*/
+
+    //a previously attempted solution
     /*if (Array.isArray(collection)){
       for (var i = 0; i<collection.length; i++){
         if (!iterator(collection[i])){
