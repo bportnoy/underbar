@@ -228,9 +228,7 @@
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(failed, item){
       if (!failed) return false;
-      else{
-      return iterator(item);
-      }
+      else return iterator(item);
     },true);
     /*if (Array.isArray(collection)){
       for (var i = 0; i<collection.length; i++){
@@ -276,7 +274,7 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-    for (var i = 0; i<arguments.length; i++){
+    for (var i = 1; i<arguments.length; i++){
       var arg = arguments[i];
       for (var key in arg){
         obj[key] = arg[key];
@@ -288,13 +286,13 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-     /*for (var i = 0; i<arguments.length; i++){
+     for (var i = 1; i<arguments.length; i++){
       var arg = arguments[i];
       for (var key in arg){
-        if (!key in obj) obj[key] = arg[key];
+        if (!obj.hasOwnProperty(key)) obj[key] = arg[key];
       }
     }
-   return obj;*/
+   return obj;
   };
 
 
