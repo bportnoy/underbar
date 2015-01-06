@@ -228,10 +228,10 @@
     // TIP: Try re-using reduce() here.
     //console.log(arguments.length);
    if (iterator === undefined) iterator = _.identity;
-    /*return _.reduce(collection, function(x,y){
+    return _.reduce(collection, function(x,y){
       console.log(iterator(x) + "," + iterator(y));
       return iterator(x) === iterator(y);
-    },true);*/
+    },true);
     /*return _.reduce(collection, function(failed, item){
       if (failed) return false;
       else {
@@ -239,11 +239,11 @@
         return iterator(item);
       }
     },true);*/
-    // code to make sure I'm understanding this problem
+    /*code to make sure I'm understanding this problem
     for (var i = 0; i<collection.length; i++){
       if (!iterator(collection[i])) return false;
     }
-    return true;
+    return true;*/
 
     //a previously attempted solution
     /*if (Array.isArray(collection)){
@@ -268,6 +268,22 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if (iterator === undefined) iterator = _.identity;
+    if (Array.isArray(collection)){
+      for (var i = 0; i<collection.length;i++){
+        if (!iterator(collection[i])) return false;
+      }
+      return true;
+    }
+    else{
+       //turn the object into an array
+      var objArr = [];
+      for (var key in collection){
+        objArr.push(collection[key]);
+      }
+      //reduce the array
+      return _.some(objArr);
+    }
   };
 
 
