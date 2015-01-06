@@ -226,8 +226,12 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-    console.log(arguments.length);
-   //attempting to handle lack of callback if (arguments.lenth === 1) return _.every(collection, function(){return _identity()});
+    //console.log(arguments.length);
+   if (iterator === undefined) iterator = _.identity;
+    /*return _.reduce(collection, function(x,y){
+      console.log(iterator(x) + "," + iterator(y));
+      return iterator(x) === iterator(y);
+    },true);*/
     /*return _.reduce(collection, function(failed, item){
       if (failed) return false;
       else {
@@ -235,11 +239,11 @@
         return iterator(item);
       }
     },true);*/
-    /* code to make sure I'm understanding this problem
+    // code to make sure I'm understanding this problem
     for (var i = 0; i<collection.length; i++){
       if (!iterator(collection[i])) return false;
     }
-    return true;*/
+    return true;
 
     //a previously attempted solution
     /*if (Array.isArray(collection)){
