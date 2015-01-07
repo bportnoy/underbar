@@ -281,7 +281,7 @@
       for (var key in collection){
         objArr.push(collection[key]);
       }
-      //reduce the array
+      //apply some
       return _.some(objArr);
     }
   };
@@ -446,6 +446,14 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var arr = [];
+    for (var i = 0; i<nestedArray.length; i++){
+      var value = nestedArray[i];
+      if (!Array.isArray(value)) arr.push(value);
+      else arr.push(_.flatten(value));
+    }
+    //console.log(arr);
+    return arr;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
