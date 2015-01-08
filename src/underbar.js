@@ -226,42 +226,34 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
-    //console.log(arguments.length);
-   if (iterator === undefined) iterator = _.identity;
+    if (iterator === undefined) iterator = _.identity;
+    //in case of objects
+    if (!Array.isArray(collection)){
+      var objArr = [];
+      for (var key in collection){
+        objArr.push(collection[key]);
+      }
+      return _.every(objArr);
+    }
+    //two attempts at making this work with reduce
+   /* this really should work
     return _.reduce(collection, function(x,y){
-      console.log(iterator(x) + "," + iterator(y));
-      return iterator(x) === iterator(y);
-    },true);
-    /*return _.reduce(collection, function(failed, item){
+      return (iterator(x) === iterator(y);
+    },true)*/
+    /*
+    another version, probably not as close to right
+    return _.reduce(collection, function(failed, item){
       if (failed) return false;
       else {
-        console.log(iterator(item));
         return iterator(item);
       }
     },true);*/
-    /*code to make sure I'm understanding this problem
+
+    //code to make sure I'm understanding this problem (also a working solution)
     for (var i = 0; i<collection.length; i++){
       if (!iterator(collection[i])) return false;
     }
-    return true;*/
-
-    //a previously attempted solution
-    /*if (Array.isArray(collection)){
-      for (var i = 0; i<collection.length; i++){
-        if (!iterator(collection[i])){
-         return false;
-       };
-      }
-    }
-    else {
-      for (var key in collection){
-        if (!iterator(collection[key])) return false;
-      }
-    }
-    /*if (Arguments.length === 1){
-      return _.reduce(collection);
-    }
-    return true;*/
+    return true;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
@@ -269,21 +261,17 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     if (iterator === undefined) iterator = _.identity;
-    if (Array.isArray(collection)){
-      for (var i = 0; i<collection.length;i++){
-        if (!iterator(collection[i])) return false;
-      }
-      return true;
-    }
-    else{
-       //turn the object into an array
+    //in case of objects
+    if (!Array.isArray(collection)){
       var objArr = [];
       for (var key in collection){
         objArr.push(collection[key]);
       }
-      //apply some
       return _.some(objArr);
     }
+    for (var i = 0; i<collection.length; i++) if (iterator(collection[i])) return true;
+    return false;
+
   };
 
 
