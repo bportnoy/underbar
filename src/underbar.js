@@ -445,9 +445,17 @@
     for (var i = 0; i<nestedArray.length; i++){
       var value = nestedArray[i];
       if (!Array.isArray(value)) arr.push(value);
-      else arr.push(_.flatten(value));
+      else {
+        for (var k = 0; k<value.length; k++){
+          arr.push(value[k]);
+        }
+      }
     }
-    //console.log(arr);
+    var deeper = false;
+    for (var i = 0; i<arr.length; i++){
+      if (Array.isArray(arr[i])) deeper = true;
+    }
+    if (deeper) arr = _.flatten(arr);
     return arr;
   };
 
