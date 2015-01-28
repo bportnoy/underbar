@@ -515,5 +515,11 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    /*return function(){
+      var called = false;
+      func.apply(this,arguments);
+      called = true;
+      }*/
   };
+
 }());
