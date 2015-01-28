@@ -481,6 +481,20 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    console.log(arguments);
+    var numArgs = arguments.length;
+    var result = array;
+    for (var i = 1; i<arguments.length; i++){
+      var current = arguments[i];
+      console.log(current);
+      var length = current.length;
+      for (var k = 0; k < length; k++){
+        while (_.indexOf(result,current[k]) !== -1){
+          result.splice(_.indexOf(result,current[k]),1);
+        }
+      }
+    }
+    return result;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
